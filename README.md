@@ -21,6 +21,6 @@ and make sure it brings in 703 articles and saves them into your database.
 
 = Tips
 
-* Run the sample parser with
+* After you've got your unit tests running, the sample parser with
 
     ruby lib/wiki_parser.rb data/small.xml
