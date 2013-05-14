@@ -29,6 +29,7 @@ class WikiImport < Nokogiri::XML::SAX::Document
     self.last_page = {}
     self.last_body = ""
     @output_file_count = 0
+    @write = File.open('wiki.sql', 'w')
   end
   
   def start_document
@@ -37,19 +38,49 @@ class WikiImport < Nokogiri::XML::SAX::Document
   
   def end_document
     logger.debug "End document"
+    @write.close
   end
   
-  def characters(c)
-   
+  def characters(text)
+    # binding.pry
+      case @name        
+         when "title"
+           @title = text
+           binding.pry
+         when "body"
+           @body = text
+         else
+          logger.debug @name
+    end
+
   end
 
   def start_element(name, attrs)
-    logger.debug "Found element #{name}"
+     
+    if name == "title" || "body"
+      @interested = true 
+      # binding.pry
+    else
+      @interested = false
+      logger.debug "Found element #{name}"
   end
+    @name = name
+    # binding.pry
+end
   
   def end_element(name)
+    # if name == "title" || "body"
+      # binding.pry
+      sql = "INSERT INTO articles (title, created_at, updated_at, body) values (\'#{@title}\', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, \'#{@body}\')\n"
+      binding.pry
+      # @write << sql
+
+    # else
+
     logger.debug "Finished element #{name}"
   end
+# end
+
   
   def method_missing(m, *args, &block)
     logger.debug("Ignoring #{m}")
@@ -67,4 +98,5 @@ class WikiImport < Nokogiri::XML::SAX::Document
   def output_file_name
     "/tmp/articles-#{@output_file_count}.sql"
   end  
+
 end
