@@ -10,6 +10,9 @@ gem 'nokogiri'
 gem 'json'
 gem 'wikitext', '~> 2.1.1'
 gem 'pry'
+gem 'carrierwave'
+gem 'devise'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'rspec-rails'

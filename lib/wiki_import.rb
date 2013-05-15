@@ -42,44 +42,57 @@ class WikiImport < Nokogiri::XML::SAX::Document
   end
   
   def characters(text)
+        if @title == "title" and @interested
+        @title = text
+        # binding.pry
+      elsif @body == "text" and @interested
+        @body = text
+        # binding.pry
+      else
+    end      
     # binding.pry
-      case @name        
-         when "title"
-           @title = text
-           binding.pry
-         when "body"
-           @body = text
-         else
-          logger.debug @name
-    end
-
   end
 
   def start_element(name, attrs)
-     
-    if name == "title" || "body"
-      @interested = true 
+    # @interested = true
+    case name
+    when "title"
+      @title = name
+      @interested = true
+      # binding.pry
+      logger.debug "match #{name}"
+    when "text"
+      @body = name
+      @interested = true
+      logger.debug "match #{name}"
+    # if name == "text" @text = name or name == "title" @title = name
+    #   @interested = true 
+    #   logger.debug "match #{name}"
       # binding.pry
     else
       @interested = false
-      logger.debug "Found element #{name}"
+    # logger.debug "Found element #{name}"
   end
-    @name = name
-    # binding.pry
+ 
 end
   
   def end_element(name)
-    # if name == "title" || "body"
+      if name = "/page" and @body != nil
       # binding.pry
-      sql = "INSERT INTO articles (title, created_at, updated_at, body) values (\'#{@title}\', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, \'#{@body}\')\n"
-      binding.pry
-      # @write << sql
+      @body = @body.gsub("'", "''")
+      @title = @title.gsub("'", "''")
 
-    # else
+      sql = "INSERT INTO articles (title, created_at, updated_at, body) values (\'#{@title}\', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, \'#{@body}\')\n"
+      # binding.pry
+      @write << sql
+      @title = nil
+      @body = nil
+
+    else
 
     logger.debug "Finished element #{name}"
   end
-# end
+end
 
   
   def method_missing(m, *args, &block)
@@ -98,5 +111,4 @@ end
   def output_file_name
     "/tmp/articles-#{@output_file_count}.sql"
   end  
-
 end
