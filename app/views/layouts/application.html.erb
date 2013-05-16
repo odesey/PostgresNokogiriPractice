@@ -5,14 +5,36 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-
 </head>
 <body>
+    <div class="nav">
+        <nav>
+         <div class="logins">   
+          <% if user_signed_in? %>
+            <%= image_tag current_user.avatar.thumb.url, :class => "login-thumb" %> 
+            <%= current_user.email %>
+            <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+          <% end %> 
 
+          <% else %>
+
+            <%= link_to "Sign up", new_user_registration_path, :id => "sign-up" %> or <%= link_to "Sign in", new_user_session_path, :id => "sign-in", :remote => true %>
+        </div>
+
+          <div class="search">
+            <%= form_tag search_path do %>
+              <%= text_field_tag :search_box, nil, :id => "search_box" %>
+              <%= submit_tag 'Search' %>
+            <% end %>
+        </div>
+
+        </nav>
+    </div>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 <%= yield %>
 
 </body>
 </html>
+

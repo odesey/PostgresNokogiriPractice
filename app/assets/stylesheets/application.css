@@ -1,13 +1,39 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require_self
- *= require_tree .
- */
+
+*= require_self
+*= require_tree .
+*/
+
+.search {
+    text-align: right;
+}
+
+#search-box {
+    border-radius: 4px;
+}
+
+
+.login-thumb {
+    margin-left: 4px;
+    border-radius: 50%;
+    margin-top: 16px;
+    border: 6px solid white;
+}
+
+
+
+
+.nav {
+    border-bottom: solid 1px #C7C7C7;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: Helvetica;
+    color: white;
+    background-image: linear-gradient(bottom, rgb(107,75,80) 44%, rgb(189,64,64) 72%, rgb(201,66,66) 86%);
+    background-image: -o-linear-gradient(bottom, rgb(107,75,80) 44%, rgb(189,64,64) 72%, rgb(201,66,66) 86%);
+    background-image: -moz-linear-gradient(bottom, rgb(107,75,80) 44%, rgb(189,64,64) 72%, rgb(201,66,66) 86%);
+    background-image: -webkit-linear-gradient(bottom, rgb(107,75,80) 44%, rgb(189,64,64) 72%, rgb(201,66,66) 86%);
+    background-image: -ms-linear-gradient(bottom, rgb(107,75,80) 44%, rgb(189,64,64) 72%, rgb(201,66,66) 86%);
+
+}
+

@@ -1,9 +1,17 @@
 Wikisearch::Application.routes.draw do
   
-  devise_for :users
+  resources :tracks
+  match '/search' => 'search#search', :as => 'search'
 
+  # devise_for :users
+
+  devise_for :users, :controllers => { :registration => "registrations" }
+  #roots to registration controller over riding devise
+
+  
   resources :articles 
   match 'wiki/:title' => 'articles#wiki'
+  root :to => 'home#index'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

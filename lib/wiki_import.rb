@@ -79,8 +79,8 @@ end
   def end_element(name)
       if name = "/page" and @body != nil
       # binding.pry
-      @body = @body.gsub("'", "''")
-      @title = @title.gsub("'", "''")
+      @body = @body.strip.gsub("'", "''")
+      @title = @title.strip.gsub("'", "''")
 
       sql = "INSERT INTO articles (title, created_at, updated_at, body) values (\'#{@title}\', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, \'#{@body}\')\n"
       # binding.pry

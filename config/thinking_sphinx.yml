@@ -1,0 +1,9 @@
+development:
+  mem_limit: 1024M
+  morphology: stem_en
+  enable_star: true
+  mysql41: 9306
+test:
+  mysql41: 9307
+  morphology: stem_en
+  enable_star: true

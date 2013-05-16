@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @track.title %>
+</p>
+
+<p>
+  <b>Track file:</b>
+  <%= @track.track_file %>
+</p>
+<%= image_tag 'play_button.png', :id => "play-button" %>
+<%= image_tag 'pause_button.png', :id => "pause-button" %>
+<%= image_tag 'stop_button.png', :id => "stop-button" %>
+
+
+<script>
+soundManager.setup({
+  url: '/swf/',
+  flashVersion: 9, // optional: shiny features (default = 8)
+  // optional: ignore Flash where possible, use 100% HTML5 mode
+  // preferFlash: false,
+  onready: function() {
+   
+    soundManager.createSound({
+      id: 'mySound',
+      url: '<%= @track.track_file.url %>',
+      autoLoad: true,
+      autoPlay: false,
+      onload: function() {
+        // alert('The sound '+this.id+' loaded!');
+      },
+      whileplaying: function() {
+        var seconds = Math.round(this.position/1000);
+
+      },
+      volume: 50
+    });
+  }
+});
+</script>
+
+<%= link_to 'Edit', edit_track_path(@track) %> |
+<%= link_to 'Back', tracks_path %>

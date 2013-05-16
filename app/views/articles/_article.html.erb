@@ -1,0 +1,6 @@
+<div class="article">
+  <h3><%= article.title %> (ID <%= article.id %>)</h3>
+  <p>
+    <%= link_to 'Read more', wiki_path(article.title.gsub(" ", "_")) %>
+  </p>
+</div>
