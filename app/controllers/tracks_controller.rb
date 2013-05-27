@@ -40,6 +40,7 @@ class TracksController < ApplicationController
   # POST /tracks
   # POST /tracks.json
   def create
+    # binding.pry
     @track = Track.new(params[:track])
 
     respond_to do |format|

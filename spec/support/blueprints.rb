@@ -6,6 +6,13 @@ Article.blueprint do
 end
 
 User.blueprint do
+  email { Faker::Internet.email }
+  password { 'password' }
+  password_confirmation { 'password' }
+end
+
+
+User.blueprint do
   # Attributes here
 end
 

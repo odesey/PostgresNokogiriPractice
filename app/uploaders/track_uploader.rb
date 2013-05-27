@@ -16,9 +16,9 @@ class TrackUploader < CarrierWave::Uploader::Base
     model.artist = result.first["metadata"]["artist"]
 
     # Go find two 'wrong answers' for our quiz
-    url = "http://developer.echonest.com/api/v4/artist/similar?api_key=UJ6VUETJ7VUYJAFHB &name=#{model.artist}&format=json&results=1&start=0"
-    results = HTTParty.get(url)
-    model.wrong_answer_1, model.wrong_answer_2 = results["response"]["artists"].sample(2).map {|a| a["name"]}
+    # url = "http://developer.echonest.com/api/v4/artist/similar?api_key=UJ6VUETJ7VUYJAFHB &name=#{model.artist}&format=json&results=1&start=0"
+    # results = HTTParty.get(url)
+    # model.wrong_answer_1, model.wrong_answer_2 = results["response"]["artists"].sample(2).map {|a| a["name"]}
   end
 
   # Create different versions of your uploaded files:

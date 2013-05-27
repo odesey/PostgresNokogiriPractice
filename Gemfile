@@ -17,6 +17,10 @@ gem 'httparty'
 gem 'binding_of_caller'
 gem 'better_errors'
 gem 'annotate'
+gem 'thin'
+gem 'rack-mini-profiler'
+gem "redis", "~> 3.0.1"
+# gem 'will_paginate'
 
 
 gem 'mysql2','0.3.12b5'
